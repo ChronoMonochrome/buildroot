@@ -42,8 +42,8 @@ mkdir -p /ext
 export ROOT="/ext/ubuntu.img"
 mkdir /mnt/root
 
-#/bin/mount /dev/mmcblk2p12 /ext
-/bin/mount /dev/mmcblk2p12 /mnt/root
+/bin/mount /dev/mmcblk0p1 /ext
+/bin/mount $ROOT -o loop,rw /mnt/root
 /bin/mount -t sysfs none /mnt/root/sys
 /bin/mount -t proc none /mnt/root/proc
 /bin/mount -t devtmpfs none /mnt/root/dev
