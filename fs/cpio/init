@@ -63,6 +63,12 @@ mount -t functionfs adb /dev/usb-ffs/adb -o uid=2000,gid=2000
 #strace -s 32 $(which adbd)
 adbd &
 
+while true
+do
+cat /etc/movglobe.vt | pv -q -L 9600 || true
+#cat /etc/beer.vt | pv -q -L 9600 || true
+done
+
 #while true
 #do
 #echo "sleep..."
