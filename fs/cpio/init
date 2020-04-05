@@ -1,6 +1,6 @@
 #!/bin/sh
 # devtmpfs does not get automounted for initramfs
-set -x
+#set -x
 /bin/mount -t devtmpfs devtmpfs -o mode=0755 /dev
 mkdir -p /dev/pts
 chmod 755 /dev/pts
@@ -23,8 +23,6 @@ modprobe g_ffs idVendor=0x18d1 idProduct=0x4e42 iSerialNumber="buildroot"
 mkdir -p /dev/usb-ffs/adb
 mount -t functionfs adb /dev/usb-ffs/adb -o uid=2000,gid=2000
 
-#strace -s 32 $(which adbd)
-
 # can't start adbd here because we call switch_root later
 #adbd &
 
@@ -36,7 +34,7 @@ mount -t functionfs adb /dev/usb-ffs/adb -o uid=2000,gid=2000
 #  done
 #} &
 
-cat /etc/movglobe.vt | pv -q -L 9600 || true
+#cat /etc/movglobe.vt | pv -q -L 9600 || true
 
 sleep 5
 mkdir -p /ext
@@ -44,8 +42,8 @@ mkdir -p /ext
 export ROOT="/ext/ubuntu.img"
 mkdir /mnt/root
 
-/bin/mount /dev/mmcblk0p1 /ext
-/bin/mount $ROOT -o loop,rw /mnt/root
+#/bin/mount /dev/mmcblk2p12 /ext
+/bin/mount /dev/mmcblk2p12 /mnt/root
 /bin/mount -t sysfs none /mnt/root/sys
 /bin/mount -t proc none /mnt/root/proc
 /bin/mount -t devtmpfs none /mnt/root/dev
@@ -53,5 +51,4 @@ mkdir /mnt/root
 echo mounted $ROOT on /mnt/root
 /bin/mount
 echo "Launching switch_root..."
-exec /sbin/switch_root /mnt/root /sbin/init
-
+exec /sbin/switch_root /mnt/root /sbin/init || while true; do sleep 5; done
