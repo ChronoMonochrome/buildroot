@@ -11,14 +11,14 @@ exec 2>/dev/console
 echo "Hi there!"
 export ROOT="/dev/mmcblk1p9"
 mkdir /mnt/root
-echo "Mount..."
-/bin/mount $ROOT /mnt/root
-/bin/mount -t sysfs none /mnt/root/sys
-/bin/mount -t proc none /mnt/root/proc
-/bin/mount -t devtmpfs none /mnt/root/dev
-/bin/mount -t tmpfs none /mnt/root/tmp
-echo mounted $ROOT on /mnt/root
-/bin/mount
-echo "Launching switch_root..."
-exec /sbin/switch_root /mnt/root /sbin/init
+#echo "Mount..."
+#/bin/mount $ROOT /mnt/root
+#/bin/mount -t sysfs none /mnt/root/sys
+#/bin/mount -t proc none /mnt/root/proc
+#/bin/mount -t devtmpfs none /mnt/root/dev
+#/bin/mount -t tmpfs none /mnt/root/tmp
+#echo mounted $ROOT on /mnt/root
+#/bin/mount
+#echo "Launching switch_root..."
+#exec /sbin/switch_root /mnt/root /sbin/init
 
